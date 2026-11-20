@@ -1,0 +1,25 @@
+{
+  "name": "The 10x Brains \u2013 Separation of Mixtures Quiz",
+  "short_name": "10x Brains",
+  "description": "Practice Chemistry separation of mixtures with a timed JAMB-standard quiz.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050505",
+  "theme_color": "#e10b1f",
+  "icons": [
+    {
+      "src": "./icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

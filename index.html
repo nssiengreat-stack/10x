@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The 10x Brains – Separation of Mixtures Quiz</title>
+<style>
+:root{--bg:#050505;--panel:#140606;--red:#e10b1f;--red2:#ff3b4a;--tx:#f4eaea;--mut:#a58f8f;--ok:#25c26e}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--tx);font-family:Georgia,'Times New Roman',serif;background:radial-gradient(ellipse at top,#3a0508 0,var(--bg) 55%) fixed}
+.wrap{max-width:820px;margin:0 auto;padding:18px 14px 60px}
+h1{margin:0;font-size:2rem;letter-spacing:.5px}h1 span{color:var(--red)}
+.sub{color:var(--mut);margin:4px 0 18px}
+.card{background:var(--panel);border:1px solid #4a0a10;border-left:5px solid var(--red);border-radius:6px;padding:20px}
+button{font:inherit;cursor:pointer;border-radius:5px;border:1px solid var(--red);background:transparent;color:var(--tx);padding:10px 18px}
+button:hover{background:#2a0609}button:focus-visible{outline:2px solid var(--red2);outline-offset:2px}
+.pri{background:var(--red);border-color:var(--red);font-weight:bold}.pri:hover{background:var(--red2)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+#timer{font:bold 1.5rem 'Courier New',monospace;color:var(--red2);border:1px solid var(--red);padding:4px 14px;border-radius:5px}
+#timer.low{animation:b 1s infinite}@keyframes b{50%{background:#4a0a10}}
+.bar{height:5px;background:#2a0a0d;border-radius:3px;margin-bottom:16px}.bar i{display:block;height:100%;background:var(--red);border-radius:3px}
+.q{font-size:1.2rem;line-height:1.5;margin:0 0 16px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;border-color:#4a0a10;background:#0c0303}
+.opt b{color:var(--red2);margin-right:10px}.opt.sel{background:var(--red);border-color:var(--red)}.opt.sel b{color:#fff}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:16px;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-top:18px}
+.grid button{padding:6px 0;font-size:.85rem;border-color:#4a0a10}.grid .ans{background:#5c0911}.grid .cur{outline:2px solid #fff}
+.score{text-align:center}.big{font-size:4rem;color:var(--red2);margin:6px 0;font-weight:bold}
+.rev{margin-top:14px;padding:12px;border-left:3px solid var(--red);background:#0c0303}.rev .c{color:var(--ok)}.rev .w{color:var(--red2)}
+#calcBtn{position:fixed;right:14px;bottom:14px;z-index:5;background:var(--red)}
+#calc{position:fixed;right:14px;bottom:62px;width:250px;background:#0c0303;border:2px solid var(--red);border-radius:8px;padding:10px;z-index:6;display:none}
+#calc input{width:100%;background:#000;border:1px solid #4a0a10;color:#fff;font:1.3rem 'Courier New',monospace;text-align:right;padding:8px;border-radius:4px;margin-bottom:8px}
+.k{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.k button{padding:9px 0}.k .o{background:#2a0609}.k .e{background:var(--red)}
+@media(max-width:520px){.grid{grid-template-columns:repeat(6,1fr)}h1{font-size:1.6rem}}
+</style>
+<link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#e10b1f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="10x Brains">
+<link rel="icon" href="./icons/icon-192.svg" type="image/svg+xml">
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(console.error));
+}
+</script>
+</head><body>
+<div class="wrap">
+<h1>The <span>10x</span> Brains</h1>
+<p class="sub">Separation of Mixtures · Chemistry · JAMB Standard</p>
+<div id="app"></div>
+</div>
+<button id="calcBtn" onclick="toggleCalc()">Calculator</button>
+<div id="calc"><input id="cd" value="" readonly aria-label="Calculator display">
+<div class="k" id="keys"></div></div>
+<script>
+const Q=[
+["Which method is used to separate an insoluble solid from a liquid?",["Filtration","Evaporation","Distillation","Sublimation"],0],
+["Ethanol can be separated from a mixture of ethanol and water by",["Filtration","Fractional distillation","Decantation","Sublimation"],1],
+["Which pair of solids can be separated by sublimation?",["NaCl and sand","NH₄Cl and NaCl","Sugar and salt","Sand and iron"],1],
+["Two immiscible liquids are best separated using a",["Separating funnel","Filter funnel","Sublimation dish","Chromatography paper"],0],
+["Common salt is obtained from sea water by",["Evaporation","Filtration","Sublimation","Magnetic separation"],0],
+["Iron filings can be separated from sulphur powder by",["Distillation","A magnet","Filtration","Sublimation"],1],
+["Pure water is obtained from salt solution by",["Filtration","Distillation","Decantation","Chromatography"],1],
+["Different plant pigments in a leaf extract can be separated by",["Chromatography","Filtration","Sublimation","Decantation"],0],
+["Crude petroleum is separated into its fractions by",["Simple distillation","Fractional distillation","Filtration","Evaporation"],1],
+["Fractional distillation separates liquids on the basis of differences in their",["Densities","Boiling points","Solubilities","Melting points"],1],
+["In filtration, the filtrate is the",["Solid left on the paper","Liquid that passes through","Gas evolved","Solvent vapour"],1],
+["The residue in filtration is the",["Solid retained on the filter paper","Clear liquid","Vapour","Solvent"],0],
+["Decantation is suitable for separating",["Sand settled in water","Ethanol and water","Salt and water","Dyes in ink"],0],
+["Which of the following sublimes on heating?",["Sodium chloride","Iodine","Sand","Sugar"],1],
+["Which of the following is NOT a mixture?",["Air","Sea water","Distilled water","Brass"],2],
+["Which is a homogeneous mixture?",["Sand and water","Oil and water","Salt solution","Chalk in water"],2],
+["Which is a heterogeneous mixture?",["Brine","Air","Muddy water","Alloy"],2],
+["Fractional crystallization separates solids based on differences in their",["Solubilities","Boiling points","Densities","Magnetic properties"],0],
+["Which gas boils off first when liquid air is fractionally distilled?",["Oxygen","Nitrogen","Argon","Carbon dioxide"],1],
+["Paper chromatography depends on differences in the",["Boiling points of components","Rates of movement of components","Densities of components","Melting points of components"],1],
+["The Rf value in chromatography is",["Solvent distance ÷ solute distance","Solute distance ÷ solvent distance","Solute distance × solvent distance","Solute distance + solvent distance"],1],
+["The first step in separating a mixture of iron filings, sand and salt is to",["Add water","Use a magnet","Evaporate","Filter"],1],
+["When a mixture of sand and salt is stirred in water and filtered, the residue is",["Salt","Sand","Water","Salt solution"],1],
+["Sugar crystals can be recovered from sugar solution by",["Filtration","Evaporation and crystallization","Sublimation","Magnetic separation"],1],
+["Which apparatus is used in fractional distillation?",["Fractionating column","Separating funnel","Filter funnel","Evaporating dish"],0],
+["The purpose of a Liebig condenser is to",["Supply heat","Cool vapour into liquid","Filter solids","Stir the mixture"],1],
+["Which crude oil fraction has the highest boiling point?",["Petrol","Kerosene","Bitumen","Diesel"],2],
+["A separating funnel works because the two liquids are",["Miscible","Immiscible","Volatile","Soluble in each other"],1],
+["Oil is extracted from palm kernel mainly by",["Solvent extraction","Sublimation","Magnetism","Decantation"],0],
+["A pure substance has a",["Sharp melting point","Wide melting range","Variable composition","Number of components"],0],
+["A characteristic of a mixture is that its components",["Have fixed proportions","Retain their individual properties","Are chemically bonded","Have a fixed melting point"],1],
+["The components of a mixture can be separated by",["Chemical reactions only","Physical methods","Nuclear reactions","Electrolysis only"],1],
+["Brass is an alloy of",["Copper and zinc","Copper and tin","Iron and carbon","Aluminium and magnesium"],0],
+["Air is classified as a",["Compound","Homogeneous mixture","Element","Heterogeneous mixture"],1],
+["When fermented wine is distilled, the first liquid to distil over is mainly",["Water","Ethanol","Sugar","Yeast"],1],
+["The boiling point of pure ethanol is about",["78 °C","100 °C","56 °C","35 °C"],0],
+["Copper(II) sulphate crystals are best obtained from its solution by",["Crystallization","Filtration","Sublimation","Chromatography"],0],
+["A saturated solution is one that",["Can dissolve more solute","Cannot dissolve more solute at that temperature","Contains no solute","Is pure solvent"],1],
+["The solubility of most solids in water, as temperature rises,",["Decreases","Increases","Remains constant","Becomes zero"],1],
+["Crystals form when a hot saturated solution is cooled because",["Solubility decreases on cooling","Solubility increases on cooling","All the water evaporates","The solute decomposes"],0],
+["Filtration separates particles mainly by",["Size","Charge","Magnetism","Boiling point"],0],
+["A centrifuge separates components on the basis of",["Density","Colour","Boiling point","Magnetism"],0],
+["Sand and gravel are best separated by",["Sieving","Distillation","Sublimation","Chromatography"],0],
+["Chaff is separated from grain by",["Winnowing","Distillation","Filtration","Chromatography"],0],
+["Unlike evaporation, distillation",["Recovers the solvent","Needs no heat","Uses a magnet","Needs filter paper"],0],
+["Which pair of liquids is miscible?",["Oil and water","Ethanol and water","Kerosene and water","Mercury and water"],1],
+["In separating NH₄Cl, NaCl and sand, the first step is to",["Add water","Heat to sublime NH₄Cl","Filter","Evaporate"],1],
+["Sulphur can be dissolved out of an iron–sulphur mixture using",["Water","Carbon disulphide","Dilute HCl","Brine"],1],
+["Which steps in water treatment remove suspended particles?",["Sedimentation and filtration","Sublimation","Magnetism","Chromatography"],0],
+["Which is NOT a physical method of separation?",["Filtration","Decantation","Neutralization","Sublimation"],2],
+["Porcelain chips are added to a distillation flask to prevent",["Bumping","Condensation","Cooling","Filtration"],0],
+["In simple distillation the thermometer bulb is placed",["Inside the liquid","At the side-arm opening of the flask","In the receiver","In the condenser jacket"],1],
+["In a Liebig condenser, cooling water should enter",["At the bottom","At the top","Either end","Through the flask"],0],
+["In paper chromatography, the stationary phase is the",["Solvent","Paper","Sample vapour","Air"],1],
+["The starting line on a chromatogram is drawn with a",["Pencil","Ink pen","Marker","Crayon"],0],
+["A pencil is used for that line because its graphite",["Does not dissolve in the solvent","Is cheaper","Is darker","Is softer"],0],
+["Decantation works when the solid is",["Dense and settles","Dissolved","A gas","Miscible"],0],
+["Two liquids with close boiling points are best separated by",["Fractional distillation","Simple filtration","Evaporation","Decantation"],0],
+["In fractional distillation, the component with the lower boiling point collects",["Near the top of the column","At the bottom","Mid-way only","Nowhere"],0],
+["Gold dust can be separated from river sand by panning, which relies on difference in",["Density","Colour","Sublimation","Magnetism"],0]
+];
+// shuffle options (keeps correct answer tracked)
+const D=Q.map(q=>{const o=q[1].map((t,i)=>({t,c:i===q[2]}));for(let i=3;i>0;i--){const j=Math.floor(Math.random()*(i+1));[o[i],o[j]]=[o[j],o[i]]}return{q:q[0],o}});
+const N=D.length,TOTAL=25*60;let cur=0,left=TOTAL,A=Array(N).fill(-1),tm=null,done=false;
+const $=id=>document.getElementById(id),L="ABCD";
+function start(){$('app').innerHTML=`<div class="card"><h2 style="margin-top:0">Ready?</h2>
+<p>${N} questions · 25 minutes · one question at a time.<br>Pick an answer, move with Next / Previous, and use the grid to jump. Your score appears the moment you submit. The calculator button is at the bottom right.</p>
+<button class="pri" onclick="begin()">Start quiz</button></div>`}
+function begin(){tm=setInterval(()=>{left--;tick();if(left<=0)finish(true)},1000);render()}
+function tick(){const t=$('timer');if(!t)return;t.textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');t.classList.toggle('low',left<=300)}
+function render(){const d=D[cur],ans=A.filter(x=>x>=0).length;
+$('app').innerHTML=`<div class="top"><div>Question <b>${cur+1}</b> of ${N} · Answered ${ans}</div><div id="timer"></div></div>
+<div class="bar"><i style="width:${(cur+1)/N*100}%"></i></div>
+<div class="card"><p class="q">${d.q}</p>${d.o.map((o,i)=>`<button class="opt ${A[cur]===i?'sel':''}" onclick="pick(${i})"><b>${L[i]}.</b>${o.t}</button>`).join('')}
+<div class="nav"><button onclick="go(-1)" ${cur?'':'disabled style="opacity:.4"'}>Previous</button>
+${cur<N-1?'<button class="pri" onclick="go(1)">Next</button>':'<button class="pri" onclick="submitQ()">Submit</button>'}</div></div>
+<div class="grid">${D.map((_,i)=>`<button class="${A[i]>=0?'ans':''} ${i===cur?'cur':''}" onclick="cur=${i};render()">${i+1}</button>`).join('')}</div>
+<p style="text-align:center"><button class="pri" onclick="submitQ()">Submit quiz</button></p>`;tick()}
+function pick(i){A[cur]=i;render()}
+function go(n){cur=Math.min(N-1,Math.max(0,cur+n));render()}
+function submitQ(){const un=A.filter(x=>x<0).length;if(confirm(un?`You have ${un} unanswered question(s). Submit now?`:'Submit your answers now?'))finish(false)}
+function finish(auto){if(done)return;done=true;clearInterval(tm);
+let s=0;D.forEach((d,i)=>{if(A[i]>=0&&d.o[A[i]].c)s++});const p=Math.round(s/N*100),j=Math.round(s/N*400);
+const g=p>=70?'Excellent work.':p>=50?'Good effort. Keep revising.':'Keep practising. You will improve.';
+$('app').innerHTML=`<div class="card score"><p style="margin:0">${auto?'Time is up. ':''}Your score</p><div class="big">${s} / ${N}</div>
+<p>${p}% · JAMB-scale equivalent: ${j} / 400<br>Correct ${s} · Wrong ${A.filter((x,i)=>x>=0&&!D[i].o[x].c).length} · Unanswered ${A.filter(x=>x<0).length}</p><p>${g}</p>
+<button class="pri" onclick="location.reload()">Retake quiz</button></div><h3>Review</h3>`+
+D.map((d,i)=>{const r=d.o.findIndex(o=>o.c),ok=A[i]===r;return`<div class="rev"><b>${i+1}. ${d.q}</b><br>Your answer: <span class="${ok?'c':'w'}">${A[i]<0?'Not answered':L[A[i]]+'. '+d.o[A[i]].t}</span>${ok?'':`<br>Correct answer: <span class="c">${L[r]}. ${d.o[r].t}</span>`}</div>`}).join('');
+window.scrollTo(0,0)}
+// calculator
+const K=['C','⌫','(',')','7','8','9','÷','4','5','6','×','1','2','3','−','0','.','=','+'];
+$('keys').innerHTML=K.map(k=>`<button class="${'÷×−+'.includes(k)?'o':k==='='?'e':''}" onclick="key('${k}')">${k}</button>`).join('');
+function toggleCalc(){const c=$('calc');c.style.display=c.style.display==='block'?'none':'block'}
+function key(k){const d=$('cd');if(k==='C')d.value='';else if(k==='⌫')d.value=d.value.slice(0,-1);
+else if(k==='='){try{const e=d.value.replace(/÷/g,'/').replace(/×/g,'*').replace(/−/g,'-');if(!/^[0-9+\-*/().\s]+$/.test(e))return;const r=Function('"use strict";return('+e+')')();d.value=Number.isFinite(r)?String(+r.toPrecision(10)):'Error'}catch(x){d.value='Error'}}
+else{if(d.value==='Error')d.value='';d.value+=k}}
+start();
+</script></body></html>
